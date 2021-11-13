@@ -1,0 +1,15 @@
+Validar estado de WMIC
+
+sc query winmgmt
+
+en caso de estar detenido se habilita mediant 
+sc config winmgmt start= auto
+validar reglas sobre WMIC
+netsh advfirewall firewall show rule name=ALL|find /i "WMI"
+
+Activar reglas 
+netsh advfirewall firewall set rule group="Instrumental de administración de Windows (WMI)" new enable=yes
+
+netsh advfirewall firewall add rule name="DSM" protocol=TCP dir=in localport=80 acction=allow
+
+netsh advfirewall firewall add rule name="permitir80" protocol=TCP dir=out localport=80 action=block
